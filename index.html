@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio-KDC</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0f0f11;
+  --text:#e9e9ec;
+  --muted:#a9a9b0;
+  --card:#151517;
+  --line:#26262a;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+.container{width:min(1100px,92%);margin:auto}
+section{padding:44px 0;border-top:1px solid var(--line)}
+
+/* HEADER */
+header{
+  position:sticky;top:0;
+  background:rgba(15,15,17,.9);
+  border-bottom:1px solid var(--line);
+  z-index:10;
+}
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 0;
+}
+.nav ul{
+  list-style:none;
+  display:flex;
+  gap:22px;
+  margin:0;padding:0;
+}
+.nav a{color:var(--muted)}
+
+.logo{
+  font-size:26px;
+  font-weight:600;
+  letter-spacing:.8px;
+}
+
+/* HERO */
+.hero h1{font-size:36px;margin:0 0 10px}
+.hero p{color:var(--muted);max-width:650px}
+
+/* PROJECT GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .grid{grid-template-columns:1fr}
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+}
+.card img{
+  width:100%;
+  aspect-ratio:16/10;
+  object-fit:cover;
+}
+.card-body{padding:14px}
+.card-title{margin:0 0 6px;font-size:18px}
+.card-meta{font-size:14px;color:var(--muted)}
+
+/* ABOUT + CONTACT */
+.simple-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.panel{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:18px;
+}
+.panel p{color:var(--muted)}
+@media(max-width:800px){
+  .simple-grid{grid-template-columns:1fr}
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:#0f0f11;
+  display:none;
+  overflow-y:auto;
+  z-index:1000;
+}
+.modal-header{
+  position:sticky;
+  top:0;
+  background:rgba(15,15,17,.9);
+  border-bottom:1px solid var(--line);
+  padding:16px 0;
+}
+.modal-header .container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.close-btn{
+  background:none;
+  border:none;
+  font-size:26px;
+  color:var(--text);
+  cursor:pointer;
+}
+
+/* PROJECT DETAIL – IMAGE FULL WIDTH, TEXT BELOW */
+.project-block{
+  margin:60px 0;
+}
+.project-block img{
+  width:100%;
+  border-radius:14px;
+  cursor:zoom-in;
+}
+.project-text{
+  margin-top:24px;
+  color:var(--muted);
+  line-height:1.8;
+  font-size:15px;
+  max-width:720px;
+}
+
+/* FULLSCREEN IMAGE */
+.image-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+.image-overlay img{
+  max-width:92%;
+  max-height:92%;
+  border-radius:14px;
+  cursor:zoom-out;
+}
+.image-overlay.active{display:flex}
+/* SAFETY: ensure modal always appears above everything */
+.modal {
+  display: none;
+}
+
+/* Better spacing when many images are added later */
+.project-block + .project-block {
+  margin-top: 80px;
+}
+
+/* Cursor clarity */
+.card img {
+  cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <strong class="logo">Studio-KDC</strong>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Timeless architecture for modern living</h1>
+    <p>We design climate-responsive, context-driven architecture with clarity and restraint.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container simple-grid">
+    <div class="panel">
+      <h3>About</h3>
+      <p>Studio-KDC is an architecture practice focused on sustainable, climate-aware design.Architecture, to me, is the art of storytelling weaving together the narratives of a building's precedents, its site context, its history, and its influence on people's lives. It is about crafting spaces that engage the senses, evoke emotion, and create lasting impressions. This website reflects a journey of translating stories into meaningful built forms throughout my architectural education</p>
+    </div>
+    <div class="panel">
+      <h3>Approach</h3>
+      <p>Daylight, ventilation, material honesty, and spatial clarity guide our work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <h2>Projects</h2>
+
+    <div class="grid">
+
+      <!-- PROJECT 1 -->
+      <article class="card"
+        data-title="Chợ Long Biên"
+        data-content='[
+          {
+            "img":"assets/images/project1.png",
+            "text":"Located in the dense urban fabric of Hanoi, the Chợ Long Biên Market is envisioned as a hybrid civic infrastructure that merges commerce, culture, and mobility into a community-centric public space. Designed as part of the ALAC competition, the project responds to the growing demand for resilient and inclusive public architecture in rapidly urbanizing cities."
+          }, {
+            "img":"assets/images/project11.png",
+            "text":"Site Plan",
+            "reverse":true
+          },{
+            "img":"assets/images/project12.png",
+            "text":"Eye level point of view",
+            "reverse":false
+          },{
+            "img":"assets/images/project13.png",
+            "text":"Retail Block Axonometric view",
+            "reverse":true
+          }
+        ]'>
+        <img src="assets/images/project1.png">
+        <div class="card-body">
+          <h3 class="card-title">Chợ Long Biên</h3>
+          <div class="card-meta">Connecting Community Through Tradition and Modernity</div>
+        </div>
+      </article>
+
+<!-- PROJECT 2 -->
+<article class="card"
+  data-title="Pravaha Homes"
+  data-content='[
+    {
+      "img":"assets/images/project2.png",
+      "text":"This retirement housing project is shaped by the flow of the site water stream, creating an organic layout that blends seamlessly with nature. The design features 300 units in total including 100 assisted-living studios, 120 two-bedroom villas, and 80 one-bedroom units- along with community hubs, all planned with elderly-friendly principles like wide pathways, gentle slopes, and landscaped open spaces. By combining accessibility, safety, and social engagement, the project offers seniors a serene environment to live independently while staying connected to healthcare, recreation, and community. It embodies the idea of aging in place, where nature and care flow together to enhance well-being and dignity."
+    },
+    {
+      "img":"assets/images/project22.jpg"
+    },
+    {
+      "img":"assets/images/project23.jpg"
+    }
+  ]'>
+
+  <img src="assets/images/project2.png">
+
+  <div class="card-body">
+    <h3 class="card-title">Pravaha Homes</h3>
+    <div class="card-meta">Inspired by Flow, Designed for Care</div>
+  </div>
+</article>
+
+
+      <!-- PROJECT 3 -->
+      <article class="card"
+        data-title="RAAHGAH"
+        data-content='[
+          {
+            "img":"assets/images/project3.png",
+            "text":"Located near the historic Falaknuma Palace, this integrated hub merges transportation and tourism into a single civic experience. Combining a high-capacity bus terminal with cultural and public programs, it serves both daily commuters and tourists.The design layers markets, galleries, and plazas through interconnected pedestrian corridors, dissolving rigid zoning. Its architectural language blends local context with contemporary modularity.More than a transit point, the hub invites people to linger, explore, and engage-transforming infrastructure into a cultural gateway that reflects the city identity through movement, connectivity, and experience."
+          },
+{
+"img":"assets/images/project32.jpg"
+},
+{
+"img":"assets/images/project33.jpg"
+},
+{
+"img":"assets/images/project34.jpg"
+}
+
+        ]'>
+        <img src="assets/images/project3.png">
+        <div class="card-body">
+          <h3 class="card-title">RAAHGAH</h3>
+          <div class="card-meta">A 21st-century rethinking of India most vital node the bus terminal</div>
+        </div>
+      </article>
+
+      <!-- PROJECT 4 -->
+      <article class="card"
+        data-title="Anaya Hospital"
+        data-content='[
+          {
+            "img":"assets/images/project4.png",
+            "text":"Anaya Multispecialty Hospital is a 50-bedded healthcare facility designed for an Indian-origin doctor returning after 25 years of practice abroad, driven by a personal mission to uplift healthcare access in his hometown near Alwal-Tumkunta, Secunderabad. Set on a 1.29-acre suburban site, the hospital is envisioned as a trusted community anchor offering ethical, patient-centric care. It provides a wide range of services across general medicine, surgery, diagnostics, maternity, and emergency care."
+          },
+{"img":"assets/images/project42.jpg"
+},
+{"img":"assets/images/project43.jpg"
+},
+{"img":"assets/images/project44.jpg"
+},
+{"img":"assets/images/project45.jpg"
+}
+        ]'>
+        <img src="assets/images/project4.png">
+        <div class="card-body">
+          <h3 class="card-title">Anaya Hospital</h3>
+          <div class="card-meta"></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container simple-grid">
+    <div class="panel">
+      <h3>Contact</h3>
+      <p>Email: pvsskartik8@gmail.com<br>Phone Number:+91 9154469333</p>
+    </div>
+    <div class="panel">
+      <h3>Practice</h3>
+      <p>Residential & mixed-use projects across South India.</p>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="projectModal">
+  <div class="modal-header">
+    <div class="container">
+      <strong id="modalTitle"></strong>
+      <button class="close-btn">&times;</button>
+    </div>
+  </div>
+  <div class="container" id="modalBody"></div>
+</div>
+
+<div class="image-overlay" id="imageOverlay">
+  <img id="overlayImage">
+</div>
+
+<script>
+const modal = document.getElementById("projectModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalBody = document.getElementById("modalBody");
+const closeBtn = document.querySelector(".close-btn");
+
+const overlay = document.getElementById("imageOverlay");
+const overlayImg = document.getElementById("overlayImage");
+
+/* Decode HTML entities safely */
+function decodeHTML(str) {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = str;
+  return txt.value;
+}
+
+/* OPEN PROJECT MODAL */
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("click", () => {
+
+    modalTitle.textContent = card.dataset.title;
+    modalBody.innerHTML = "";
+
+    let content;
+    try {
+      content = JSON.parse(decodeHTML(card.dataset.content));
+    } catch (err) {
+      console.error("JSON error:", err);
+      return;
+    }
+
+    content.forEach(block => {
+      const blockEl = document.createElement("div");
+      blockEl.className = "project-block";
+
+      const img = document.createElement("img");
+      img.src = block.img;
+      img.classList.add("zoomable");
+
+      /* ZOOM ONLY INSIDE MODAL */
+      img.addEventListener("click", (e) => {
+        e.stopPropagation();
+        overlayImg.src = img.src;
+        overlay.classList.add("active");
+      });
+
+      blockEl.appendChild(img);
+
+      if (block.text) {
+        const text = document.createElement("div");
+        text.className = "project-text";
+        text.textContent = block.text;
+        blockEl.appendChild(text);
+      }
+
+      modalBody.appendChild(blockEl);
+    });
+
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+  });
+});
+
+/* CLOSE MODAL */
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+  document.body.style.overflow = "auto";
+});
+
+/* CLOSE IMAGE OVERLAY */
+overlay.addEventListener("click", () => {
+  overlay.classList.remove("active");
+  overlayImg.src = "";
+});
+</script>
+
+
+
+
+
+</body>
+</html>
