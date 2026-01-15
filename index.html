@@ -309,7 +309,87 @@ body.modal-open{
   margin: 28px auto 0;
   padding: 0 12px;
 }
+.gallery-section {
+  max-width: 1200px;
+  margin: 100px auto;
+  padding: 0 20px;
+}
 
+.gallery-section h2 {
+  margin-bottom: 40px;
+}
+
+/* Masonry Grid */
+.masonry {
+  column-count: 4;
+  column-gap: 20px;
+}
+
+.masonry img {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  break-inside: avoid;
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.masonry img:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .masonry { column-count: 3; }
+}
+@media (max-width: 800px) {
+  .masonry { column-count: 2; }
+}
+@media (max-width: 500px) {
+  .masonry { column-count: 1; }
+}
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.page-section {
+  display: none;
+}
+
+.page-section.active {
+  display: block;
+}
+#contact {
+  padding-top: 120px; /* navbar height + breathing space */
+}
 
 
 </style>
@@ -324,30 +404,39 @@ body.modal-open{
       <span>Studio-KDC</span>
     </div>
     <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+<li><a href="#" data-target="home">Home</a></li>
+<li><a href="#" data-target="about">About</a></li>
+<li><a href="#" data-target="projects">Projects</a></li>
+<li><a href="#" data-target="gallery">Gallery</a></li>
+<li><a href="#" data-target="contact">Contact</a></li>
+
+
+
     </ul>
   </div>
 </header>
 
-<div id="intro">
+<!-- INTRO SCREEN -->
+<section id="intro" class="intro-screen active">
   <div class="intro-content">
-    <img src="assets/images/logo.png">
+    <img src="assets/images/logo.png" alt="Studio-KDC logo">
     <h1>Studio-KDC</h1>
     <p><strong>K</strong>artik <strong>D</strong>esign <strong>C</strong>ollective</p>
-    <span>Architecture · Sustainability · Context</span>
-  </div>
-</div>
-
-<section class="hero">
-  <div class="container">
-    <h1>Timeless architecture for modern living</h1>
-    <p>We design climate-responsive, context-driven architecture with clarity and restraint.</p>
+    <span>Tap anywhere to enter</span>
   </div>
 </section>
 
-<section id="about">
+<section id="home" class="page-section active">
+  <section class="hero">
+    <div class="container">
+      <h1>Timeless architecture for modern living</h1>
+      <p>We design climate-responsive, context-driven architecture with clarity and restraint.</p>
+    </div>
+  </section>
+</section>
+
+
+<section id="about" class="page-section">
   <div class="container">
 
     <h2>About Studio-KDC</h2>
@@ -355,7 +444,7 @@ body.modal-open{
     <!-- IMAGE + TEXT ROW -->
     <div class="about-top">
       <div class="about-image">
-        <img src="assets/images/about.jpeg" alt="Studio KDC">
+        <img src="assets/images/about.jpeg" alt="Studio-KDC studio image">
       </div>
 
       <div class="about-text">
@@ -373,40 +462,40 @@ body.modal-open{
         </p>
       </div>
     </div>
-
-    <!-- TIMELINE BELOW -->
-    <div class="timeline-wrap">
-      <div class="timeline-card">
-        <h4 id="timelineTitle">2016 — First Project</h4>
-        <p id="timelineText">
-          Studio-KDC begins its journey with its first independent residential project.
-        </p>
-      </div>
-
-      <input
-        type="range"
-        min="0"
-        max="2"
-        step="1"
-        value="0"
-        class="timeline-slider"
-        id="timelineSlider"
-      />
-
-      <div class="timeline-years">
-        <span>2016</span>
-        <span>2020</span>
-        <span>2025</span>
-      </div>
-    </div>
-
+<!-- TIMELINE BELOW --> 
+<div class="timeline-wrap">
+  <div class="timeline-card">
+    <h4 id="timelineTitle"></h4>
+    <p id="timelineText"></p>
   </div>
 
+  <input
+    type="range"
+    min="0"
+    max="3"
+    step="1"
+    value="0"
+    class="timeline-slider"
+    id="timelineSlider"
+  />
 
+  <div class="timeline-years">
+<span>2002</span>
+    <span>2014</span>
+    <span>2018</span>
+    <span>2021</span>
+  </div>
+</div>
+
+
+
+
+  </div>
 </section>
 
+
 <!-- PROJECTS -->
-<section id="projects">
+<section id="projects" class="page-section">
   <div class="container">
     <h2>Projects</h2>
     <div class="grid">
@@ -517,8 +606,27 @@ body.modal-open{
         </div>
   </div>
 </section>
+<section id="gallery" class="page-section">
+ <div class="container">
+  <h2>Visual Journal</h2>
 
-<section id="contact">
+  <div class="masonry">
+    <!-- Add as many images as you want -->
+    <img src="assets/images/project43.jpg" alt="">
+<img src="assets/images/project44.jpg" alt="">
+<img src="assets/images/project45.jpg" alt="">
+    <img src="assets/images/logo.jpg" alt="">
+    <img src="assets/images/about.jpeg" alt="">
+    <img src="assets/images/project13.jpg" alt="">
+    <img src="assets/images/project22.jpg" alt="">
+    <img src="assets/images/img6.jpg" alt="">
+<img src="assets/images/project32.jpg" alt="">
+<img src="assets/images/project31.jpg" alt="">
+  </div>
+</div>
+</section>
+
+<section id="contact" class="page-section">
   <div class="container simple-grid">
     <div class="panel">
       <h3>Contact</h3>
@@ -548,7 +656,11 @@ body.modal-open{
 <div class="image-overlay" id="imageOverlay">
   <img id="overlayImage">
 </div>
-
+<!-- IMAGE LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-img" id="lightboxImg">
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -645,37 +757,105 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 /* HORIZONTAL TIMELINE LOGIC */
-const timelineData = [
+const educationData = [
+{title: "Birth",
+text: "Born in Visakhapatnam"
+
+},
   {
-    title: "2016 — First Project",
-    text: "Studio-KDC begins its journey with its first independent residential project."
+    title: "2014 – 2018 • High School",
+    text: "Vijayam Techno School, Visakhapatnam, Andhra Pradesh"
   },
   {
-    title: "2020 — First Major Client",
-    text: "The studio completes larger residential and commercial projects, expanding its reach."
+    title: "2018 – 2020 • Secondary High School",
+    text: "Ascent Junior College, Visakhapatnam, Andhra Pradesh"
   },
   {
-    title: "2025 — Growing Practice",
-    text: "Studio-KDC works across South India with a strong focus on climate-responsive architecture."
+    title: "2021 – 2026 • B.Arch",
+    text: "School of Planning and Architecture, JNAFAU, Hyderabad"
   }
 ];
 
 const slider = document.getElementById("timelineSlider");
-const titleEl = document.getElementById("timelineTitle");
-const textEl = document.getElementById("timelineText");
+const title = document.getElementById("timelineTitle");
+const text = document.getElementById("timelineText");
 
-if (slider) {
-  slider.addEventListener("input", () => {
-    const data = timelineData[slider.value];
-    titleEl.textContent = data.title;
-    textEl.textContent = data.text;
-  });
+function updateTimeline(index) {
+  title.textContent = educationData[index].title;
+  text.textContent = educationData[index].text;
 }
+
+updateTimeline(0);
+
+slider.addEventListener("input", () => {
+  updateTimeline(slider.value);
+});
+
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const closeBtn = document.querySelector(".lightbox-close");
+
+/* Open image */
+document.querySelectorAll(".masonry img").forEach(img => {
+  img.addEventListener("click", () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add("active");
+  });
+});
+
+/* Close on X */
+closeBtn.addEventListener("click", () => {
+  lightbox.classList.remove("active");
+});
+
+/* Close on background click */
+lightbox.addEventListener("click", (e) => {
+  if (e.target !== lightboxImg) {
+    lightbox.classList.remove("active");
+  }
+});
+
+/* Close on ESC */
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    lightbox.classList.remove("active");
+  }
+});
+
+
+
+/* INTRO → HOME */
+const intro = document.getElementById("intro");
+const home = document.getElementById("home");
+
+function enterSite() {
+  intro.style.display = "none";
+  home.classList.add("active");
+}
+
+intro.addEventListener("click", enterSite);
+
+/* TAB NAVIGATION */
+document.querySelectorAll(".navbar a").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+
+    const target = link.dataset.target;
+
+    document.querySelectorAll(".page-section").forEach(sec =>
+      sec.classList.remove("active")
+    );
+
+    document.getElementById(target).classList.add("active");
+  });
+});
 
 
 
 
 </script>
+
 
 
 </body>
