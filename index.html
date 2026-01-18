@@ -64,6 +64,30 @@ section{padding:44px 0;border-top:1px solid var(--line)}
   align-items:center;
   gap:12px;
 }
+.nav a {
+  color: var(--muted);
+  font-weight: 400;
+  position: relative;
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+.nav a.active {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Optional underline indicator */
+.nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+}
+
 
 .brand img{height:36px}
 
@@ -404,7 +428,7 @@ body.modal-open{
       <span>Studio-KDC</span>
     </div>
     <ul>
-<li><a href="#" data-target="home">Home</a></li>
+<li><a href="#" data-target="home" class="active">Home</a></li>
 <li><a href="#" data-target="about">About</a></li>
 <li><a href="#" data-target="projects">Projects</a></li>
 <li><a href="#" data-target="gallery">Gallery</a></li>
@@ -612,16 +636,49 @@ body.modal-open{
 
   <div class="masonry">
     <!-- Add as many images as you want -->
-    <img src="assets/images/project43.jpg" alt="">
-<img src="assets/images/project44.jpg" alt="">
-<img src="assets/images/project45.jpg" alt="">
-    <img src="assets/images/logo.jpg" alt="">
-    <img src="assets/images/about.jpeg" alt="">
-    <img src="assets/images/project13.jpg" alt="">
-    <img src="assets/images/project22.jpg" alt="">
+    <img src="assets/images/img1.jpg" alt="">
+    <img src="assets/images/img5.jpg" alt="">
+    <img src="assets/images/img14.jpg" alt="">
+    <img src="assets/images/img4.jpg" alt="">
+    <img src="assets/images/img15.jpg" alt="">
     <img src="assets/images/img6.jpg" alt="">
-<img src="assets/images/project32.jpg" alt="">
-<img src="assets/images/project31.jpg" alt="">
+    <img src="assets/images/img7.jpg" alt="">
+    <img src="assets/images/img8.jpg" alt="">
+    <img src="assets/images/img3.jpg" alt="">
+    <img src="assets/images/img10.jpg" alt="">
+<img src="assets/images/img11.jpg" alt="">
+<img src="assets/images/img12.jpg" alt="">
+<img src="assets/images/img13.jpg" alt="">
+<img src="assets/images/img19.jpg" alt="">
+<img src="assets/images/img2.jpg" alt="">
+<img src="assets/images/img16.jpg" alt="">
+<img src="assets/images/img17.jpg" alt="">
+<img src="assets/images/img18.jpg" alt="">
+<img src="assets/images/img19.jpg" alt="">
+<img src="assets/images/img20.jpg" alt="">
+<img src="assets/images/img21.jpg" alt="">
+<img src="assets/images/img22.jpg" alt="">
+<img src="assets/images/img23.jpg" alt="">
+<img src="assets/images/img24.jpg" alt="">
+<img src="assets/images/img25.jpg" alt="">
+<img src="assets/images/img26.jpg" alt="">
+<img src="assets/images/img27.jpg" alt="">
+<img src="assets/images/img28.jpg" alt="">
+<img src="assets/images/img29.jpg" alt="">
+<img src="assets/images/img30.jpg" alt="">
+<img src="assets/images/img31.jpg" alt="">
+<img src="assets/images/img32.jpg" alt="">
+<img src="assets/images/img33.jpg" alt="">
+<img src="assets/images/img34.jpg" alt="">
+<img src="assets/images/img35.jpg" alt="">
+<img src="assets/images/img36.jpg" alt="">
+<img src="assets/images/img37.jpg" alt="">
+<img src="assets/images/img38.jpg" alt="">
+<img src="assets/images/img39.jpg" alt="">
+<img src="assets/images/img40.jpg" alt="">
+<img src="assets/images/img41.jpg" alt="">
+<img src="assets/images/img42.jpg" alt="">
+
   </div>
 </div>
 </section>
@@ -836,21 +893,25 @@ function enterSite() {
 
 intro.addEventListener("click", enterSite);
 
-/* TAB NAVIGATION */
 document.querySelectorAll(".navbar a").forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
 
     const target = link.dataset.target;
 
+    /* switch sections */
     document.querySelectorAll(".page-section").forEach(sec =>
       sec.classList.remove("active")
     );
-
     document.getElementById(target).classList.add("active");
+
+    /* switch active nav */
+    document.querySelectorAll(".navbar a").forEach(a =>
+      a.classList.remove("active")
+    );
+    link.classList.add("active");
   });
 });
-
 
 
 
